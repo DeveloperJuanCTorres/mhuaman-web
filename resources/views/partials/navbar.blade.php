@@ -174,7 +174,7 @@ OFFCANVAS MOBILE
         <!-- BUTTON -->
         <div class="mt-auto pt-4">
 
-            <a href="#"
+            <a href="https://aula.mhcampacitaciones.com" target="_blank"
                 class="btn btn-dark-blue w-100 rounded-4 py-3 fw-semibold d-flex align-items-center justify-content-center gap-2">
 
                 <i class="fa-solid fa-graduation-cap"></i>
