@@ -1,0 +1,181 @@
+/* =========================================================
+NAVBAR
+========================================================= */
+
+.main-navbar{
+    padding: 1rem 0;
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid rgba(0,0,0,.05);
+
+    transition: all .3s ease;
+
+    z-index: 999;
+}
+
+.navbar-brand{
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #0f172a !important;
+    letter-spacing: .5px;
+}
+
+/* .navbar-nav{
+    gap: .4rem;
+} */
+
+.nav-link{
+    position: relative;
+
+    font-size: .96rem;
+    font-weight: 600;
+
+    color: #475569 !important;
+
+    padding: .85rem 1.2rem !important;
+
+    border-radius: 14px;
+
+    transition: all .3s ease;
+}
+
+.nav-link:hover{
+    color: #0f172a !important;
+    background: rgba(15,23,42,.05);
+}
+
+.nav-link.active{
+    color: #fff !important;
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    box-shadow: 0 10px 25px rgba(15,23,42,.18);
+}
+
+/* =========================================================
+BUTTON
+========================================================= */
+
+.btn-dark-blue{
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    color: #fff;
+    border: none;
+
+    font-weight: 600;
+
+    transition: all .3s ease;
+}
+
+.btn-dark-blue:hover{
+    transform: translateY(-2px);
+    color: #fff;
+
+    box-shadow: 0 14px 30px rgba(15,23,42,.25);
+}
+
+/* =========================================================
+CUSTOM TOGGLER
+========================================================= */
+
+.custom-toggler{
+    width: 28px;
+    height: 22px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.custom-toggler span{
+    width: 100%;
+    height: 3px;
+
+    background: #0f172a;
+
+    border-radius: 10px;
+
+    transition: all .3s ease;
+}
+
+/* =========================================================
+OFFCANVAS
+========================================================= */
+
+.mobile-sidebar{
+    width: 320px !important;
+
+    background: #fff;
+
+    border-left: 1px solid rgba(0,0,0,.06);
+}
+
+.mobile-sidebar .offcanvas-header{
+    padding: 1.4rem 1.5rem;
+}
+
+.mobile-sidebar .offcanvas-body{
+    padding: 1.5rem;
+}
+
+/* =========================================================
+MOBILE NAV
+========================================================= */
+
+.mobile-nav{
+    gap: .6rem;
+}
+
+.mobile-nav .nav-link{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem 1.2rem !important;
+
+    border-radius: 18px;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    background: #f8fafc;
+
+    color: #334155 !important;
+
+    transition: all .3s ease;
+}
+
+.mobile-nav .nav-link i{
+    width: 20px;
+    text-align: center;
+}
+
+.mobile-nav .nav-link:hover{
+    transform: translateX(4px);
+
+    background: rgba(15,23,42,.06);
+
+    color: #0f172a !important;
+}
+
+.mobile-nav .nav-link.active{
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    color: #fff !important;
+
+    box-shadow: 0 10px 25px rgba(15,23,42,.18);
+}
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media(max-width:991px){
+
+    .main-navbar{
+        padding: .9rem 0;
+    }
+
+    .navbar-brand{
+        font-size: 1.2rem;
+    }
+
+}
