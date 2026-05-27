@@ -79,7 +79,7 @@ TOP NAVBAR
             <!-- RIGHT -->
             <div class="d-flex align-items-center gap-3">
 
-                <a href="https://aula.mhcampacitaciones.com" target="_blank"
+                <a href="https://aula.mhcapacitaciones.com" target="_blank"
                     class="btn btn-dark-blue rounded-4 px-4 d-flex align-items-center gap-2">
                     <i class="fa-solid fa-graduation-cap"></i>
                     AULA VIRTUAL
@@ -174,7 +174,7 @@ OFFCANVAS MOBILE
         <!-- BUTTON -->
         <div class="mt-auto pt-4">
 
-            <a href="https://aula.mhcampacitaciones.com" target="_blank"
+            <a href="https://aula.mhcapacitaciones.com" target="_blank"
                 class="btn btn-dark-blue w-100 rounded-4 py-3 fw-semibold d-flex align-items-center justify-content-center gap-2">
 
                 <i class="fa-solid fa-graduation-cap"></i>
