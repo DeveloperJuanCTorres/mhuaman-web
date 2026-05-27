@@ -79,7 +79,7 @@ TOP NAVBAR
             <!-- RIGHT -->
             <div class="d-flex align-items-center gap-3">
 
-                <a href="#"
+                <a href="https://aula.mhcampacitaciones.com" target="_blank"
                     class="btn btn-dark-blue rounded-4 px-4 d-flex align-items-center gap-2">
                     <i class="fa-solid fa-graduation-cap"></i>
                     AULA VIRTUAL
