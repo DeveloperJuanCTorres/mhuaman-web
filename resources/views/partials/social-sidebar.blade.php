@@ -66,9 +66,9 @@
                 <h5 class="fw-bold text-primary">$571.12</h5>
             </div>
         </div>
-        <button class="btn btn-primary-blue w-100 py-3 mb-3 d-flex align-items-center justify-content-center gap-2">
+        <a class="btn btn-primary-blue w-100 py-3 mb-3 d-flex align-items-center justify-content-center gap-2" href="{{ route('checkout') }}">
             Finalizar Compra <i class="fa-solid fa-arrow-right"></i>
-        </button>
+        </a>
         <button class="btn btn-link w-100 text-primary text-decoration-none fw-bold">Seguir Comprando</button>
         <div class="text-center mt-4 text-muted small">
             <i class="fa-solid fa-shield-halved me-2"></i> Pago 100% seguro y encriptado

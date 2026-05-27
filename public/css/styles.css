@@ -39,6 +39,12 @@
     --on-surface-variant: #43474f;
     --on-primary: #ffffff;
     --text-gold: #C5A059;
+
+    --secondary-fixed: #ffdea5;
+
+
+
+    
 }
 
 body {
@@ -1185,43 +1191,146 @@ BRAND LOGO
 
 
 
-    .section-title-line {
-        width: 80px;
-        height: 4px;
-        background-color: var(--secondary);
-        margin: 1.5rem auto;
-    }
+.section-title-line {
+    width: 80px;
+    height: 4px;
+    background-color: var(--secondary);
+    margin: 1.5rem auto;
+}
 
-    .contact-section {
-        background-color: var(--primary);
-        color: white;
-        padding: 100px 0;
-    }
+.contact-section {
+    background-color: var(--primary);
+    color: white;
+    padding: 100px 0;
+}
 
-    .contact-form-card {
-        background: white;
-        border-radius: 1.25rem;
-        padding: 2.5rem;
-        color: var(--on-surface);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    }
+.contact-form-card {
+    background: white;
+    border-radius: 1.25rem;
+    padding: 2.5rem;
+    color: var(--on-surface);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
 
-    .btn-gold {
-        background-color: var(--secondary);
-        color: var(--primary);
-        font-weight: 700;
-        border: none;
-        padding: 1rem;
-        transition: all 0.3s;
-    }
+.btn-gold {
+    background-color: var(--secondary);
+    color: var(--primary);
+    font-weight: 700;
+    border: none;
+    padding: 1rem;
+    transition: all 0.3s;
+}
 
-    .btn-gold:hover {
-        filter: brightness(1.1);
-        color: var(--primary);
-    }
+.btn-gold:hover {
+    filter: brightness(1.1);
+    color: var(--primary);
+}
 
-    footer {
-        background-color: var(--primary);
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        color: rgba(255, 255, 255, 0.7);
-    }
+footer {
+    background-color: var(--primary);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+.checkout-card {
+    background: var(--surface-container-lowest);
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 40, 85, 0.05);
+    border: none;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.border-brand-top {
+    border-top: 4px solid var(--secondary) !important;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border-color: var(--outline-variant);
+    padding: 0.75rem;
+    border-radius: 8px;
+}
+
+.form-control:focus {
+    border-color: var(--primary-container);
+    box-shadow: 0 0 0 0.25 darkred;
+    /* placeholder for focus style matching brand */
+    box-shadow: 0 0 0 2px rgba(0, 40, 85, 0.1);
+}
+
+.payment-option {
+    border: 1px solid var(--outline-variant);
+    border-radius: 12px;
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.payment-option.active {
+    border-color: var(--primary-container);
+    background-color: rgba(0, 40, 85, 0.05);
+    border-width: 2px;
+}
+
+.order-summary-card {
+    background-color: var(--primary);
+    color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    position: sticky;
+    top: 100px;
+}
+
+.text-secondary-brand {
+    color: var(--secondary-fixed) !important;
+}
+
+.btn-pay {
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 1.25rem;
+    font-family: 'Lexend', sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    width: 100%;
+    transition: transform 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-pay:hover {
+    transform: translateY(-2px);
+    color: white;
+    background-color: #5d4201;
+}
+
+.trust-badge {
+    font-size: 12px;
+    color: var(--on-surface-variant);
+}
+
+.support-box {
+    background-color: #edeeef;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--outline-variant);
+    margin-top: 2rem;
+}
+
+.img-course-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+}

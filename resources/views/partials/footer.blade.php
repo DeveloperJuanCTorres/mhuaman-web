@@ -3,7 +3,21 @@
     <div class="container pb-5">
         <div class="row g-4">
             <div class="col-lg-4">
-                <h3 class="navbar-brand text-white fw-bold mb-4">M HUAMAN</h3>
+                <!-- LOGO -->
+                <a class="navbar-brand brand-logo d-flex align-items-center gap-2"
+                href="{{ route('home') }}">
+
+                    <img src="{{ asset('images/isotipo1.png') }}"
+                        alt="Logo"
+                        width="80"
+                        class="brand-isotipo">
+
+                    <div class="brand-text">
+                        <span class="brand-title text-white">M HUAMAN</span>
+                        <small class="brand-subtitle">Capacitaciones</small>
+                    </div>
+
+                </a>
                 <p>Expertos en auditoría y consultoría con una trayectoria de excelencia académica y corporativa.</p>
             </div>
             <div class="col-sm-6 col-lg-2">
