@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SolicitudConsultoriaMail;
 use App\Models\Course;
+use App\Models\Taxonomy;
 
 class HomeController extends Controller
 {
@@ -52,8 +53,9 @@ class HomeController extends Controller
     public function cursos()
     {
         $company = Company::first();
+        $categorias = Taxonomy::all();
         $cursos = Course::with(['specialist.degree'])->where('active', 1)->get();
-        return view('cursos', compact('company', 'cursos'));
+        return view('cursos', compact('company', 'cursos', 'categorias'));
     }
 
     public function clientes()

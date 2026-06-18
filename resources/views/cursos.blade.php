@@ -21,15 +21,35 @@
             <div class="col-lg-6">
                 <div class="search-input-group">
                     <i class="fa-solid fa-search"></i>
-                    <input class="form-control form-control-lg" placeholder="Buscar cursos por nombre o especialidad..." type="text" />
+
+                    <input
+                        id="buscarCurso"
+                        class="form-control form-control-lg"
+                        placeholder="Buscar cursos por nombre..."
+                        type="text">
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="d-flex gap-2 overflow-x-auto pb-1">
-                    <button class="filter-btn active">Todos</button>
-                    <button class="filter-btn">Auditoría</button>
-                    <button class="filter-btn">Control</button>
-                    <button class="filter-btn">Gestión Pública</button>
+
+                    <button
+                        class="filter-btn active categoria-btn"
+                        data-id="todos">
+                        Todos
+                    </button>
+
+                    @foreach($categorias as $categoria)
+
+                    <button
+                        class="filter-btn categoria-btn"
+                        data-id="{{$categoria->id}}">
+
+                        {{$categoria->nombre}}
+
+                    </button>
+
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -38,9 +58,12 @@
 <!-- Courses Grid -->
 <section class="py-5 my-5">
     <div class="container">
-        <div class="row g-4">
+        <div class="row g-4" id="contenedorCursos">
             @foreach($cursos as $curso)
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4 curso-item"
+                data-nombre="{{ mb_strtolower($curso->nombre, 'UTF-8') }}"
+                data-categoria="{{ $curso->taxonomy_id }}">
+
                 <div class="card course-card">
                     <div class="card-img-container">
                         <img alt="Auditoría Financiera" class="card-img-top" src="{{asset ('storage/' . $curso->imagen)}}" />
@@ -94,6 +117,69 @@
     </div>
 </section>
 
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const buscador = document.getElementById("buscarCurso");
+    const botones = document.querySelectorAll(".categoria-btn");
+    const cursos = document.querySelectorAll(".curso-item");
+
+    let categoriaActual = "todos";
+
+    function normalizar(texto) {
+        return (texto || "")
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function filtrar() {
+
+        const texto = normalizar(buscador.value);
+
+        cursos.forEach(curso => {
+
+            const nombre = normalizar(curso.dataset.nombre);
+            const categoria = curso.dataset.categoria;
+
+            const coincideNombre = nombre.includes(texto);
+
+            const coincideCategoria =
+                categoriaActual === "todos" ||
+                categoria == categoriaActual;
+
+            if (coincideNombre && coincideCategoria) {
+                curso.style.display = "";
+            } else {
+                curso.style.display = "none";
+            }
+
+        });
+
+    }
+
+    buscador.addEventListener("input", filtrar);
+
+    botones.forEach(btn => {
+
+        btn.addEventListener("click", function () {
+
+            botones.forEach(x => x.classList.remove("active"));
+
+            this.classList.add("active");
+
+            categoriaActual = this.dataset.id;
+
+            filtrar();
+
+        });
+
+    });
+
+});
+</script>
 @endsection
 
 
