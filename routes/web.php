@@ -22,6 +22,11 @@ Route::get('/clientes', [App\Http\Controllers\HomeController::class, 'clientes']
 Route::get('/consultoria', [App\Http\Controllers\HomeController::class, 'consultoria'])->name('consultoria');
 Route::get('/checkout', [App\Http\Controllers\HomeController::class, 'checkout'])->name('checkout');
 
+Route::post(
+    '/consultorias/enviar',
+    [App\Http\Controllers\HomeController::class, 'enviar']
+)->name('consultorias.enviar');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

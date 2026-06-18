@@ -1,18 +1,81 @@
 @extends('layouts.app')
+<style>
+    .consultoria-modal{
+        overflow:hidden;
+        border-radius:24px;
+        box-shadow:0 25px 80px rgba(0,0,0,.25);
+    }
 
+    .modal-side{
+        background:
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #1e3a8a
+        );
+
+        color:white;
+    }
+
+    .side-content{
+        padding:60px 50px;
+        height:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+    }
+
+    .beneficio{
+        margin-bottom:18px;
+        font-size:15px;
+    }
+
+    .beneficio i{
+        color:#fbbf24;
+        margin-right:10px;
+    }
+
+    .premium-input{
+        border-radius:14px;
+        padding:14px 16px;
+        border:1px solid #e5e7eb;
+    }
+
+    .premium-input:focus{
+        border-color:#2563eb;
+        box-shadow:0 0 0 4px rgba(37,99,235,.15);
+    }
+
+    .custom-close{
+        position:absolute;
+        top:20px;
+        right:20px;
+        z-index:100;
+    }
+
+    .modal-backdrop.show{
+        opacity:.75;
+        backdrop-filter:blur(4px);
+    }
+</style>
 @section('content')
 
 <!-- Hero Section -->
 <section class="hero-section">
-    <img alt="Modern corporate facade" class="hero-bg-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_XlqEdppsj6jj9XfG23QzrJHtTl2bMxkMZMqh44M_nSKIzKukFv7lGAQzrnuQLcrD2gao6ek_X2LeAZptlJ3yMBQ9F7v1EbKFpGkTA-9ZUzUGdNracxFBSa2d1Gmi_th12DvDz4H1tjB-EYR1hMBIIF49sYCVukK1YAcnD6NGNuNR9hkVCGkBZwurMow0cib7t8r7VckcZBD1mXHE4ETrit_XD5e5h-6Aw1EQ3yk9eUHRc5rIsOG4iJmLNEQCKWtCYyXHPCKCTTg" />
+    <img alt="Modern corporate facade" class="hero-bg-img" src="{{ asset('storage/' . $principal->banner) }}" />
     <div class="container position-relative">
         <div class="row">
             <div class="col-lg-7">
-                <h1 class="display-4 mb-4">Consultoría Estratégica para la Excelencia Institucional</h1>
-                <p class="lead mb-5 opacity-75">Fortalecemos la integridad y eficiencia de su organización a través de servicios especializados de auditoría y asesoría técnica con estándares internacionales.</p>
+                <h1 class="display-4 mb-4">{{ $principal->titulo }}</h1>
+                <p class="lead mb-5 opacity-75">{{ $principal->descripcion }}</p>
                 <div class="d-flex flex-wrap gap-3">
-                    <button class="btn btn-primary py-3 px-4" style="background-color: #007BFF; border: none;">Solicitar Asesoría</button>
-                    <button class="btn btn-outline-light py-3 px-4">Nuestros Servicios</button>
+                    <button
+                        class="btn btn-primary py-3 px-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#consultoriaModal"
+                        data-servicio="">
+                        Solicitar Asesoría
+                    </button>
                 </div>
             </div>
         </div>
@@ -27,83 +90,39 @@
             <div class="section-title-line"></div>
         </div>
         <div class="row g-4">
-            <!-- Card 1 -->
+            @foreach($consultorias as $consultoria)
             <div class="col-md-4">
                 <div class="premium-card">
                     <div class="icon-box">
-                        <i class="fa-solid fa-chart-line"></i>
+                        <img src="{{ asset('storage/' . $consultoria->icono) }}" alt="{{ $consultoria->nombre }}" width="48">
+                        <!-- <i class="fa-solid fa-chart-line"></i> -->
                     </div>
-                    <h3>Auditoría Interna</h3>
-                    <p class="text-muted small mb-4">Evaluación sistemática de procesos para identificar riesgos operativos y asegurar la transparencia financiera.</p>
+                    <h3>{{ $consultoria->nombre }}</h3>
+                    <p class="text-muted small mb-4">{{ $consultoria->descripcion }}</p>
                     <ul class="list-unstyled mb-4 small">
-                        <li class="mb-2"><i class="fa-solid fa-circle-check text-gold me-2"></i> Optimización de recursos</li>
-                        <li><i class="fa-solid fa-circle-check text-gold me-2"></i> Mitigación de fraudes</li>
+                        @if($consultoria->item_1)
+                        <li class="mb-2"><i class="fa-solid fa-circle-check text-gold me-2"></i> {{ $consultoria->item_1}}</li>
+                        @endif
+                        @if($consultoria->item_2)
+                        <li><i class="fa-solid fa-circle-check text-gold me-2"></i> {{ $consultoria->item_2 }}</li>
+                        @endif
+                        @if($consultoria->item_3)
+                        <li class="mb-2"><i class="fa-solid fa-circle-check text-gold me-2"></i> {{ $consultoria->item_3 }}</li>
+                        @endif
+                        @if($consultoria->item_4)
+                        <li><i class="fa-solid fa-circle-check text-gold me-2"></i> {{ $consultoria->item_4 }}</li>
+                        @endif
                     </ul>
-                    <a class="text-gold text-decoration-none fw-bold small" href="#">Ver detalle <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                    <button
+                        class="btn btn-outline-primary w-100 solicitar-consultoria"
+                        data-bs-toggle="modal"
+                        data-bs-target="#consultoriaModal"
+                        data-servicio="{{ $consultoria->nombre }}">
+                        Solicitar Asesoría
+                    </button>
                 </div>
             </div>
-            <!-- Card 2 -->
-            <div class="col-md-4">
-                <div class="premium-card">
-                    <div class="icon-box">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <h3>Control Interno</h3>
-                    <p class="text-muted small mb-4">Diseño e implementación de marcos de control robustos basados en metodologías COSO para salvaguardar activos.</p>
-                    <ul class="list-unstyled mb-4 small">
-                        <li class="mb-2"><i class="fa-solid fa-circle-check text-gold me-2"></i> Estructura organizativa</li>
-                        <li><i class="fa-solid fa-circle-check text-gold me-2"></i> Supervisión continua</li>
-                    </ul>
-                    <a class="text-gold text-decoration-none fw-bold small" href="#">Ver detalle <i class="fa-solid fa-arrow-right ms-1"></i></a>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="col-md-4">
-                <div class="premium-card">
-                    <div class="icon-box">
-                        <i class="fa-solid fa-building-columns"></i>
-                    </div>
-                    <h3>Gestión Pública</h3>
-                    <p class="text-muted small mb-4">Asesoría especializada para entidades estatales enfocada en la eficiencia del gasto y cumplimiento legal.</p>
-                    <ul class="list-unstyled mb-4 small">
-                        <li class="mb-2"><i class="fa-solid fa-circle-check text-gold me-2"></i> Modernización estatal</li>
-                        <li><i class="fa-solid fa-circle-check text-gold me-2"></i> Rendición de cuentas</li>
-                    </ul>
-                    <a class="text-gold text-decoration-none fw-bold small" href="#">Ver detalle <i class="fa-solid fa-arrow-right ms-1"></i></a>
-                </div>
-            </div>
-            <!-- Card 4 (Wide) -->
-            <div class="col-md-8">
-                <div class="premium-card">
-                    <div class="row align-items-center">
-                        <div class="col-md-7">
-                            <div class="icon-box">
-                                <i class="fa-solid fa-gavel"></i>
-                            </div>
-                            <h3>Cumplimiento Normativo</h3>
-                            <p class="text-muted small mb-4">Aseguramos que su empresa opere bajo el marco legal vigente, evitando sanciones y fortaleciendo la reputación corporativa.</p>
-                            <div class="row g-2">
-                                <div class="col-6 small"><i class="fa-solid fa-shield-check text-gold me-2"></i> Compliance Legal</div>
-                                <div class="col-6 small"><i class="fa-solid fa-lock text-gold me-2"></i> Gestión de Riesgos</div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 d-none d-md-block">
-                            <img alt="Justice" class="img-fluid rounded grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvMfL-OV5zeV9ruO7VCYGecd3yhhcqOk1V2Uw98mGsO9d4fdYbYZtymZbAnGNQIwUFpJuKELTIBwF9DFRM1FvDHkdahaPxxrmZs_h3ChyUXbgRpFC_F25wQLO9PivNAlkNOC_OnkRCO1aAVEuI1ioHQXTlVZPUsS47EGNCkAR-gw88ZVzVglK3CzbZtjd-2AP32wv1pM17PRvdpeFuNaK9LluWzhYaILaFg6HWL4vrSvCtpVJ7anDVEJuy5m3ZLV4gyG9GAOf14sQ" style="height: 180px; object-fit: cover;" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 5 -->
-            <div class="col-md-4">
-                <div class="premium-card">
-                    <div class="icon-box">
-                        <i class="fa-solid fa-briefcase"></i>
-                    </div>
-                    <h3>Asesoría Empresarial</h3>
-                    <p class="text-muted small mb-4">Consultoría integral para el crecimiento sostenible y la toma de decisiones estratégicas de alta dirección.</p>
-                    <a class="text-gold text-decoration-none fw-bold small" href="#">Ver detalle <i class="fa-solid fa-arrow-right ms-1"></i></a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -125,40 +144,243 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="contact-form-card">
-                    <h3 class="text-center text-primary mb-4">Solicitar Asesoría Técnica</h3>
-                    <form>
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label small fw-bold">Nombre Completo</label>
-                                <input class="form-control" placeholder="Ej. Juan Pérez" type="text" />
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-bold">Correo Corporativo</label>
-                                <input class="form-control" placeholder="juan@empresa.com" type="email" />
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-bold">Servicio de Interés</label>
-                            <select class="form-select">
-                                <option>Auditoría Interna</option>
-                                <option>Control Interno</option>
-                                <option>Gestión Pública</option>
-                                <option>Cumplimiento Normativo</option>
-                                <option>Asesoría Empresarial</option>
-                            </select>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label small fw-bold">Mensaje / Requerimiento</label>
-                            <textarea class="form-control" placeholder="Describa brevemente su consulta..." rows="4"></textarea>
-                        </div>
-                        <button class="btn btn-gold w-100 rounded-3" type="submit">Agendar Cita de Consultoría</button>
-                    </form>
+                <div class="contact-form-card text-center">
+                    <h3 class="text-primary mb-3">
+                        Solicite una asesoría especializada
+                    </h3>
+
+                    <p class="text-muted mb-4">
+                        Nuestro equipo se comunicará con usted para brindarle una solución personalizada.
+                    </p>
+
+                    <button
+                        class="btn btn-gold btn-lg"
+                        data-bs-toggle="modal"
+                        data-bs-target="#consultoriaModal"
+                    >
+                        Solicitar Asesoría
+                    </button>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+<div class="modal fade" id="consultoriaModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content consultoria-modal border-0">
+
+            <button type="button"
+                class="btn-close btn-close custom-close"
+                data-bs-dismiss="modal">
+            </button>
+
+            <div class="row g-0">
+
+                <!-- PANEL IZQUIERDO -->
+                <div class="col-lg-5 modal-side">
+
+                    <div class="side-content">
+
+                        <img src="{{ asset('storage/' . $company->logo) }}"
+                             class="m-auto d-flex"
+                             width="100">
+
+                        <span class="badge bg-light text-primary mb-3">
+                            CONSULTORÍA ESPECIALIZADA
+                        </span>
+
+                        <h2 class="fw-bold mb-4">
+                            Impulse el crecimiento de su organización
+                        </h2>
+
+                        <p class="opacity-75 mb-4">
+                            Nuestros especialistas analizarán su situación y
+                            propondrán soluciones estratégicas adaptadas a sus objetivos.
+                        </p>
+
+                        <div class="beneficio">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Diagnóstico inicial gratuito
+                        </div>
+
+                        <div class="beneficio">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Atención personalizada
+                        </div>
+
+                        <div class="beneficio">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Propuesta técnica especializada
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- FORMULARIO -->
+                <div class="col-lg-7">
+
+                    <div class="p-5">
+
+                        <h3 class="fw-bold mb-2">
+                            Solicitar Asesoría
+                        </h3>
+
+                        <p class="text-muted mb-4">
+                            Complete el formulario y un consultor se comunicará con usted.
+                        </p>
+
+                        <form id="formConsultoria"
+                            method="POST"
+                            action="{{ route('consultorias.enviar') }}">
+
+                            @csrf
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <label class="form-label">
+                                        Nombre Completo
+                                    </label>
+
+                                    <input type="text"
+                                           name="nombre"
+                                           class="form-control premium-input"
+                                           required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">
+                                        Correo Electrónico
+                                    </label>
+
+                                    <input type="email"
+                                           name="correo"
+                                           class="form-control premium-input"
+                                           required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">
+                                        Teléfono
+                                    </label>
+
+                                    <input type="text"
+                                           name="telefono"
+                                           class="form-control premium-input">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">
+                                        Consultoría
+                                    </label>
+
+                                    <select id="consultoriaSelect"
+                                            name="servicio"
+                                            class="form-select premium-input"
+                                            required>
+
+                                        <option value="">
+                                            Seleccione una consultoría
+                                        </option>
+
+                                        @foreach($consultorias as $consultoria)
+                                            <option value="{{ $consultoria->nombre }}">
+                                                {{ $consultoria->nombre }}
+                                            </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+                                <div class="col-12">
+
+                                    <label class="form-label">
+                                        Cuéntenos su necesidad
+                                    </label>
+
+                                    <textarea
+                                        name="mensaje"
+                                        rows="5"
+                                        class="form-control premium-input"
+                                        placeholder="Describa brevemente su requerimiento..."
+                                        required></textarea>
+
+                                </div>
+
+                                <div class="col-12">
+
+                                    <button
+                                        id="btnEnviarConsultoria"
+                                        class="btn btn-primary w-100 py-3 fw-semibold"
+                                        type="submit">
+
+                                        <span class="btn-text">
+                                            Enviar Solicitud
+                                        </span>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    document.getElementById('consultoriaModal')
+    .addEventListener('show.bs.modal', function (event) {
+
+        const button = event.relatedTarget;
+
+        if(!button) return;
+
+        const servicio = button.dataset.servicio;
+
+        const select = document.getElementById('consultoriaSelect');
+
+        if(servicio){
+            select.value = servicio;
+        }else{
+            select.selectedIndex = 0;
+        }
+
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+
+        const form = document.getElementById('formConsultoria');
+        const btn = document.getElementById('btnEnviarConsultoria');
+
+        form.addEventListener('submit', function(){
+
+            btn.disabled = true;
+
+            btn.innerHTML = `
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Enviando solicitud...
+            `;
+        });
+
+    });
+</script>
 
 @endsection
 

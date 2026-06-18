@@ -8,13 +8,13 @@ TOP NAVBAR
         <a class="navbar-brand brand-logo d-flex align-items-center gap-2"
         href="{{ route('home') }}">
 
-            <img src="{{ asset('images/isotipo1.png') }}"
+            <img src="{{ asset('storage/' . $company->logo) }}"
                 alt="Logo"
                 width="80"
                 class="brand-isotipo">
 
             <div class="brand-text">
-                <span class="brand-title">M HUAMAN</span>
+                <span class="brand-title">{{ $company->nombre }}</span>
                 <small class="brand-subtitle">Capacitaciones</small>
             </div>
 
@@ -105,13 +105,13 @@ OFFCANVAS MOBILE
         <a class="navbar-brand brand-logo d-flex align-items-center gap-2"
         href="{{ route('home') }}">
 
-            <img src="{{ asset('images/isotipo1.png') }}"
+            <img src="{{ asset('storage/' . $company->logo) }}"
                 alt="Logo"
                 width="80"
                 class="brand-isotipo">
 
             <div class="brand-text">
-                <span class="brand-title">M HUAMAN</span>
+                <span class="brand-title">{{ $company->nombre }}</span>
                 <small class="brand-subtitle">Capacitaciones</small>
             </div>
 

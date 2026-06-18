@@ -2,7 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
+use App\Models\Benefit;
+use App\Models\Company;
+use App\Models\Consultancy;
+use App\Models\Evolution;
+use App\Models\Item;
+use App\Models\Team;
+use App\Models\Technique;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SolicitudConsultoriaMail;
+use App\Models\Course;
 
 class HomeController extends Controller
 {
@@ -23,31 +34,59 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $company = Company::first();
+        $banners = Banner::all();
+        $beneficio = Benefit::first();
+        return view('home', compact('company', 'banners', 'beneficio'));
     }
 
     public function about()
     {
-        return view('about');
+        $company = Company::first();
+        $nosotros = Item::first();
+        $evolutions = Evolution::all();
+        $equipo = Team::all();
+        return view('about', compact('company', 'nosotros', 'evolutions', 'equipo'));
     }
 
     public function cursos()
     {
-        return view('cursos');
+        $company = Company::first();
+        $cursos = Course::with(['specialist.degree'])->where('active', 1)->get();
+        return view('cursos', compact('company', 'cursos'));
     }
 
     public function clientes()
     {
-        return view('clientes');
+        $company = Company::first();
+        return view('clientes', compact('company'));
     }
 
     public function consultoria()
     {
-        return view('consultoria');
+        $company = Company::first();
+        $principal =Technique::first();
+        $consultorias = Consultancy::all();
+        return view('consultoria', compact('company', 'principal', 'consultorias'));
     }
 
     public function checkout()
     {
-        return view('checkout');
+        $company = Company::first();
+        return view('checkout', compact('company'));
+    }
+
+    public function enviar(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required',
+            'correo' => 'required|email',
+            'servicio' => 'required',
+            'mensaje' => 'required'
+        ]);
+
+        Mail::to('consultorias@mhcapacitaciones.com')->send(new SolicitudConsultoriaMail($request->all()));
+
+        return back()->with('success', true);
     }
 }

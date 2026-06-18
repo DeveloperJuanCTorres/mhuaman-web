@@ -10,48 +10,41 @@
         <button data-bs-slide-to="2" data-bs-target="#heroCarousel" type="button"></button>
     </div>
     <div class="carousel-inner">
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-            <img alt="Auditoría" class="carousel-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxKUZVzQkYAHRQ_9lMNxvs3cvHPpko7WSSrAYQakYoiLC5LVvHwG9fxmKbjTjYE2KP4AI2heiUr63cUZmdg8W1c-BwreyCs0OMYUT0xwRzqQqOQTscWjIxhSe-x5ba6TezCSAi8_BoZkocW-P_Kpq1lO9VZgn2dqxW3J8XrVz1VmZOjSLt7vzBn_o1UswIKuaD_H0C2wo-HLDXN3YqqCTntiSveg-Nz3vd2LXGxFdlEBTqbF_nL4J8A_894Ew6NJXNcF-DfDSA7Jc" />
-            <div class="container hero-content">
-                <div class="col-lg-7">
-                    <h1 class="display-3 fw-bold mb-4">Líderes en Auditoría y Control Interno</h1>
-                    <p class="lead mb-5 opacity-75">Elevamos los estándares profesionales a través de programas educativos de élite y asesoría técnica especializada para el sector público y privado.</p>
-                    <div class="d-flex flex-wrap gap-3">
-                        <button class="btn btn-gold">Ver Cursos</button>
-                        <button class="btn btn-outline-gold">Solicitar Información</button>
+
+        @foreach($banners as $banner)
+            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+
+                <img
+                    src="{{ asset('storage/' . $banner->imagen) }}"
+                    alt="{{ $banner->titulo }}"
+                    class="carousel-image"
+                >
+
+                <div class="container hero-content">
+                    <div class="col-lg-7">
+                        <h1 class="display-3 fw-bold mb-4">
+                            {{ $banner->titulo }}
+                        </h1>
+
+                        <p class="lead mb-5 opacity-75">
+                            {{ $banner->subtitulo }}
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="{{ route('cursos') }}" class="btn btn-gold">
+                                Ver Cursos
+                            </a>
+
+                            <a href="{{ route('about') }}" class="btn btn-outline-gold">
+                                Solicitar Información
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </div>
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-            <img alt="Capacitación" class="carousel-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_0EMhMRuJFLSonMk_Pa33SX8v9qSs7caHiLytxmDnfh8vi-eonhJY_pyazq3o0_Nlbw9f-GOL8WZP7fzfpGb_vafTvlOLjKB_TlusLBDHFjohF62c7IYslE0dbifGeVU9udLgkbkumeNX4TcdT7YwnDHE4-Penwcfyuxus-lSig4VAI34uK_UuF60VxgqEHQhxmIBwvYKsFtQ8-aSWTZsHYNqvIUgZrtvNif55U72jofvCLjS0G_5B2JV1DYChyZWTFitbASqVM4" />
-            <div class="container hero-content">
-                <div class="col-lg-7">
-                    <h1 class="display-3 fw-bold mb-4">Capacitación Especializada de Alto Impacto</h1>
-                    <p class="lead mb-5 opacity-75">Programas de especialización diseñados por expertos con amplia experiencia en control gubernamental y normativas internacionales.</p>
-                    <div class="d-flex flex-wrap gap-3">
-                        <button class="btn btn-gold">Ver Cursos</button>
-                        <button class="btn btn-outline-gold">Solicitar Información</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Slide 3 -->
-        <div class="carousel-item">
-            <img alt="Consultoría" class="carousel-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuWVou1yikj4bfcFoeklYd4TtHSOBMEXympFdFz_zQr3PG_-gMNt4DXn0LXuNuBk4Fwr_951B4_ccpG0RoJ6MkGME9mUv9xTevsXWztFL6AMSWMbqBOfl1DBZfTzIjzeizCbTy-OmxTViHp-CV38zuWjqDiDDfeHMRQymjCuErxOgtdi38rY3HOzl_8KlurUtPGXRa309sQ-ZXeEJ8Wma6vhfrq52ppxgzXsRuKMfoSXsTP-hnurlBxummIgEcNNNwWBSEmQDPqto" />
-            <div class="container hero-content">
-                <div class="col-lg-7">
-                    <h1 class="display-3 fw-bold mb-4">Consultoría Estratégica para el Crecimiento</h1>
-                    <p class="lead mb-5 opacity-75">Asesoramos a su organización en la gestión de riesgos corporativos y optimización de procesos operativos bajo estándares COSO.</p>
-                    <div class="d-flex flex-wrap gap-3">
-                        <button class="btn btn-gold">Ver Cursos</button>
-                        <button class="btn btn-outline-gold">Solicitar Información</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
+
     </div>
     <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#heroCarousel" type="button">
         <span class="carousel-control-prev-icon"></span>
@@ -72,7 +65,7 @@
                 <div>
                     <i class="fa-solid fa-circle-check"></i>
                     <h3 class="h2 mb-3">Certificación Oficial</h3>
-                    <p class="text-muted fs-5">Programas avalados con valor curricular que potencian tu perfil profesional en el mercado global.</p>
+                    <p class="text-muted fs-5">{{ $beneficio->certificacion }}</p>
                 </div>
             </div>
         </div>
@@ -80,14 +73,14 @@
             <div class="benefit-card">
                 <i class="fa-solid fa-user-tie"></i>
                 <h3 class="h4 mb-3">Expertos</h3>
-                <p class="text-muted">Plana docente conformada por líderes en auditoría y control gubernamental.</p>
+                <p class="text-muted">{{ $beneficio->expertos }}</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4">
             <div class="benefit-card">
                 <i class="fa-solid fa-display"></i>
                 <h3 class="h4 mb-3">Clases Virtuales</h3>
-                <p class="text-muted">Acceso 24/7 a nuestra plataforma interactiva desde cualquier dispositivo.</p>
+                <p class="text-muted">{{ $beneficio->clases }}</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-8">
@@ -97,7 +90,7 @@
                 </div>
                 <div>
                     <h3 class="h2 mb-2 text-white">Soporte Continuo</h3>
-                    <p class="opacity-75 mb-0">Asesoría técnica y acompañamiento durante todo tu proceso de aprendizaje.</p>
+                    <p class="opacity-75 mb-0">{{ $beneficio->soporte }}</p>
                 </div>
             </div>
         </div>
@@ -120,53 +113,77 @@
         </div>
         <div class="row g-4">
             <!-- Course 1 -->
-            <div class="col-md-4">
-                <div class="course-card">
-                    <div class="course-img-container">
-                        <img alt="Auditoría Forense" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwkLBF-Ng12OoeTcKaT3LKeu4CNXpOIchphS1xNCjpdYSAQIx23waiSEdfzgmehZME0_TBF0T3QJiXlD32mhO2ZM3GoqsL0K1wOMxNqkJxmr1lnE_GOzLVZOI4nFlCBuf22Wv1HRM8OPM4KlccliElImXIggeMLfr_VP_zD9DsRn7_ganwxxMEsow-90SxqiGC4Yr4fqtPAOfpEMTr7UjvFrVZLJvQ8y4uxLA9taVRB71JflfOgjJnLWdue6Ih80Vn5ihCLjTBDes" />
-                        <span class="course-badge">Modalidad Virtual</span>
+            <div class="col-md-6 col-lg-4">
+                <div class="card course-card">
+                    <div class="card-img-container">
+                        <img alt="Auditoría Financiera" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLu6UJJt4FnMkOQOrOtwb4K1cwL3qenfqWdofW-LsnuTiTZkHqmW2a1tMw7DAlaQPe8dY8Utpl5Kf_O5BBavyYM5Ek_5J9aDhxPbzvAO7ISNST9gvduo50ROXaUodhosMRvgFpgMRy241g14MEFruzynpXiJuDO_CCIPPciglwqM0BTQ8UbnzKwVOCDl7CnFnEmVgfRaWGgjRwbAiq-OrdUxgStzQeJMdA2aZhBE2ixNtMLHWzhQrHpj7vbJkehAqTE9aH0QeecT0" />
+                        <span class="badge-new">Nuevo</span>
                     </div>
-                    <div class="p-4">
-                        <h3 class="h4 fw-bold mb-4">Auditoría Forense y Prevención de Fraude</h3>
-                        <div class="d-flex gap-4 text-muted mb-4 border-bottom pb-3">
-                            <div class="small d-flex align-items-center gap-1"><i class="fa-regular fa-clock"></i> 60 Horas</div>
-                            <div class="small d-flex align-items-center gap-1"><i class="fa-solid fa-award"></i> Especialización</div>
+                    <div class="card-body">
+                        <h3 class="card-title">Auditoría Financiera Gubernamental</h3>
+                        <ul class="info-list">
+                            <li><i class="fa-solid fa-user"></i> Dr. Roberto Huaman</li>
+                            <li><i class="fa-solid fa-laptop"></i> Virtual (En Vivo)</li>
+                            <li><i class="fa-solid fa-clock"></i> 48 Horas Académicas</li>
+                            <li><i class="fa-solid fa-certificate"></i> Certificación Universitaria</li>
+                        </ul>
+                        <div class="card-footer-custom">
+                            <div>
+                                <span class="price-label">Inversión</span>
+                                <span class="price-value">S/ 450.00</span>
+                            </div>
+                            <button class="btn btn-inscribirme">Inscribirme</button>
                         </div>
-                        <button class="btn btn-dark-blue w-100 py-3">Más Información</button>
                     </div>
                 </div>
             </div>
             <!-- Course 2 -->
-            <div class="col-md-4">
-                <div class="course-card">
-                    <div class="course-img-container">
-                        <img alt="Control Interno" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuWVou1yikj4bfcFoeklYd4TtHSOBMEXympFdFz_zQr3PG_-gMNt4DXn0LXuNuBk4Fwr_951B4_ccpG0RoJ6MkGME9mUv9xTevsXWztFL6AMSWMbqBOfl1DBZfTzIjzeizCbTy-OmxTViHp-CV38zuWjqDiDDfeHMRQymjCuErxOgtdi38rY3HOzl_8KlurUtPGXRa309sQ-ZXeEJ8Wma6vhfrq52ppxgzXsRuKMfoSXsTP-hnurlBxummIgEcNNNwWBSEmQDPqto" />
-                        <span class="course-badge">En Vivo</span>
+            <div class="col-md-6 col-lg-4">
+                <div class="card course-card">
+                    <div class="card-img-container">
+                        <img alt="Control Interno" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL3v6gOK2IVPa7JX9_FZLCkLJRGDtxMmrhQZhQXmudC0qFwWfcwm80CRfi82xE6MWYZggV7y7U25s_UZHrvN36ycHI4aUu9p0Ikic3WV9wmgkdZhtZCm7PKKZltaUdvr7nNpaAVvPy0AENDcmCPW02PUBrZUpgyIE6oGFIpCmh3KkJ6HfAbEHyT19UtWTDYj5yus--0dkFSB3TGGyMYkCenK8po4COYMlwDU3jzhBwGcprRP6NBgLo1cHJjur4puYMMXHShUk2Br8" />
+                        <span class="badge-popular">Popular</span>
                     </div>
-                    <div class="p-4">
-                        <h3 class="h4 fw-bold mb-4">Gestión de Riesgos y Control Interno (COSO 2013)</h3>
-                        <div class="d-flex gap-4 text-muted mb-4 border-bottom pb-3">
-                            <div class="small d-flex align-items-center gap-1"><i class="fa-regular fa-clock"></i> 45 Horas</div>
-                            <div class="small d-flex align-items-center gap-1"><i class="fa-solid fa-award"></i> Diplomado</div>
+                    <div class="card-body">
+                        <h3 class="card-title">Sistema Nacional de Control</h3>
+                        <ul class="info-list">
+                            <li><i class="fa-solid fa-user"></i> Mag. Elena Vargas</li>
+                            <li><i class="fa-solid fa-circle-play"></i> Asincrónico (Grabado)</li>
+                            <li><i class="fa-solid fa-clock"></i> 32 Horas Académicas</li>
+                            <li><i class="fa-solid fa-certificate"></i> Certificación Institucional</li>
+                        </ul>
+                        <div class="card-footer-custom">
+                            <div>
+                                <span class="price-label">Inversión</span>
+                                <span class="price-value">S/ 320.00</span>
+                            </div>
+                            <button class="btn btn-inscribirme">Inscribirme</button>
                         </div>
-                        <button class="btn btn-dark-blue w-100 py-3">Más Información</button>
                     </div>
                 </div>
             </div>
             <!-- Course 3 -->
-            <div class="col-md-4">
-                <div class="course-card border-top border-gold border-4">
-                    <div class="course-img-container">
-                        <img alt="Control Gubernamental" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_0EMhMRuJFLSonMk_Pa33SX8v9qSs7caHiLytxmDnfh8vi-eonhJY_pyazq3o0_Nlbw9f-GOL8WZP7fzfpGb_vafTvlOLjKB_TlusLBDHFjohF62c7IYslE0dbifGeVU9udLgkbkumeNX4TcdT7YwnDHE4-Penwcfyuxus-lSig4VAI34uK_UuF60VxgqEHQhxmIBwvYKsFtQ8-aSWTZsHYNqvIUgZrtvNif55U72jofvCLjS0G_5B2JV1DYChyZWTFitbASqVM4" />
-                        <span class="course-badge bg-gold text-dark">Premium</span>
+            <div class="col-md-6 col-lg-4">
+                <div class="card course-card">
+                    <div class="card-img-container">
+                        <img alt="Gestión Pública" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbaQHEmsqZsIV3_3z8XhqPyVoGgDfdyoNiGIGXKqveVaZntkK_AUUfxJQGtckeGOjiigdyueE8pQ74HAjjWwgGOb6URww2-TlhDDgvkPzY3tSJJdEZXIs0DZIV_OkdLlIAwAqYCae0nwyThTv8OAuzfy4hwOtKasR2KFYmBqSpukWxbeAwHzxjEGTAmLHiAMmfgW26vvXirg7zqi6_diIs3u0kfgQDoVicRQ39mUZ85csvoqU-L2898zvlyeSaQrkHP_bDfWQY0-8" />
+                        <span class="badge-new">Nuevo</span>
                     </div>
-                    <div class="p-4">
-                        <h3 class="h4 fw-bold mb-4">Control Gubernamental y Normas de Auditoría (ISSAI)</h3>
-                        <div class="d-flex gap-4 text-muted mb-4 border-bottom pb-3">
-                            <div class="small d-flex align-items-center gap-1"><i class="fa-regular fa-clock"></i> 80 Horas</div>
-                            <div class="small d-flex align-items-center gap-1"><i class="fa-solid fa-award"></i> Certificación</div>
+                    <div class="card-body">
+                        <h3 class="card-title">Gestión Pública por Resultados</h3>
+                        <ul class="info-list">
+                            <li><i class="fa-solid fa-user"></i> Eco. Juan Carlos Paz</li>
+                            <li><i class="fa-solid fa-laptop"></i> Virtual (En Vivo)</li>
+                            <li><i class="fa-solid fa-clock"></i> 60 Horas Académicas</li>
+                            <li><i class="fa-solid fa-certificate"></i> Doble Certificación</li>
+                        </ul>
+                        <div class="card-footer-custom">
+                            <div>
+                                <span class="price-label">Inversión</span>
+                                <span class="price-value">S/ 580.00</span>
+                            </div>
+                            <button class="btn btn-inscribirme">Inscribirme</button>
                         </div>
-                        <button class="btn btn-gold w-100 py-3">Matricularse Ahora</button>
                     </div>
                 </div>
             </div>

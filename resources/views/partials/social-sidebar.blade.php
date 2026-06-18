@@ -1,9 +1,9 @@
 <!-- Social Sidebar -->
 <div class="social-sidebar">
-    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="{{ $company->facebook }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="{{ $company->tiktok }}" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="{{ $company->instagram }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    <a href="{{ $company->linkedin }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
 </div>
 <!-- Floating Cart Button -->
 <a class="cart-btn" href="#" data-bs-target="#cartOffcanvas" data-bs-toggle="offcanvas">

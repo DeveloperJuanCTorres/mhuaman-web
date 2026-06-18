@@ -40,7 +40,38 @@
         @include('partials.footer')
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if(session('success'))
+        <script>
+
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Solicitud enviada correctamente',
+            text: 'Un especialista se comunicará con usted pronto.',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true
+        });
+
+        </script>
+    @endif
+
+    @if ($errors->any())
+        <script>
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Datos incompletos',
+            text: 'Por favor complete todos los campos requeridos.'
+        });
+
+        </script>
+    @endif
+
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 </html>
