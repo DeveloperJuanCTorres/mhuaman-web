@@ -20,16 +20,11 @@
         <p class="text-center text-uppercase fw-bold text-muted small ls-wider" style="letter-spacing: 0.2em;">Confían en nuestra experiencia</p>
     </div>
     <div class="logo-track">
-        <div class="logo-item">CORP A</div>
-        <div class="logo-item">INST B</div>
-        <div class="logo-item">GOV C</div>
-        <div class="logo-item">BANK D</div>
-        <div class="logo-item">TECH E</div>
-        <div class="logo-item">CORP A</div>
-        <div class="logo-item">INST B</div>
-        <div class="logo-item">GOV C</div>
-        <div class="logo-item">BANK D</div>
-        <div class="logo-item">TECH E</div>
+        @foreach($clientes as $cliente)
+        <div class="logo-item">
+            <img src="{{asset('storage/' . $cliente->imagen)}}" width="100" alt="">
+        </div>
+        @endforeach
     </div>
 </section>
 <!-- Stats Bento -->
@@ -161,8 +156,8 @@
         <div class="cta-box">
             <h2 class="display-5 fw-bold text-primary mb-5">¿Listo para elevar sus estándares institucionales?</h2>
             <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                <button class="btn btn-aula px-5 py-3">Solicitar Consultoría</button>
-                <button class="btn btn-outline-primary px-5 py-3 rounded-3 fw-bold">Ver Servicios</button>
+                <a href="{{ route('consultoria') }}" class="btn btn-aula px-5 py-3">Solicitar Consultoría</a>
+                <!-- <button class="btn btn-outline-primary px-5 py-3 rounded-3 fw-bold">Ver Servicios</button> -->
             </div>
         </div>
     </div>

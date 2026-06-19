@@ -77,7 +77,95 @@ TOP NAVBAR
             </ul>
 
             <!-- RIGHT -->
-            <div class="d-flex align-items-center gap-3">
+             <div class="d-flex align-items-center gap-3">
+
+                <a href="https://aula.mhcapacitaciones.com"
+                    target="_blank"
+                    class="btn btn-dark-blue rounded-4 px-4">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                    AULA VIRTUAL
+
+                </a>
+
+                @guest
+
+                    <button
+                        class="btn btn-outline-primary rounded-pill px-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#authModal">
+
+                        <i class="fa-solid fa-user"></i>
+                        Ingresar
+
+                    </button>
+
+                @endguest                
+
+                @auth
+
+                    <!-- Usuario -->
+
+                    <div class="dropdown">
+
+                        <button
+                            class="btn btn-light rounded-pill dropdown-toggle px-4"
+                            data-bs-toggle="dropdown">
+
+                            <i class="fa-solid fa-circle-user"></i>
+
+                            {{ Auth::user()->name }}
+
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-4">
+
+                            <li>
+
+                                <a class="dropdown-item py-2"
+                                    href="{{ route('perfil') }}">
+
+                                    <i class="fa-solid fa-user me-2"></i>
+
+                                    Mi Perfil
+
+                                </a>
+
+                            </li>
+
+                            </li>
+
+                            <li><hr></li>
+
+                            <li>
+
+                                <form method="POST"
+                                    action="{{ route('logout') }}">
+
+                                    @csrf
+
+                                    <button
+                                        class="dropdown-item text-danger">
+
+                                        <i class="fa-solid fa-right-from-bracket me-2"></i>
+
+                                        Cerrar sesión
+
+                                    </button>
+
+                                </form>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                @endauth                
+
+            </div>
+            <!-- <div class="d-flex align-items-center gap-3">
 
                 <a href="https://aula.mhcapacitaciones.com" target="_blank"
                     class="btn btn-dark-blue rounded-4 px-4 d-flex align-items-center gap-2">
@@ -85,7 +173,7 @@ TOP NAVBAR
                     AULA VIRTUAL
                 </a>
 
-            </div>
+            </div> -->
         </div>
     </div>
 </nav>
@@ -185,6 +273,172 @@ OFFCANVAS MOBILE
         </div>
 
     </div>
+</div>
+
+
+
+<div class="modal fade" id="authModal" tabindex="-1">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+
+        <div class="modal-content auth-modal">
+
+            <div class="row g-0">
+
+                <div class="col-lg-5 auth-left">
+
+                    <div>
+
+                        <h2>Bienvenido</h2>
+
+                        <p>
+                            Accede a nuestros cursos especializados y potencia tu carrera profesional.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-7">
+
+                    <div class="auth-right">
+
+                        <ul class="nav nav-pills nav-fill mb-4">
+
+                            <li class="nav-item">
+
+                                <button
+                                    class="nav-link active"
+                                    data-bs-toggle="pill"
+                                    data-bs-target="#loginTab">
+
+                                    Iniciar Sesión
+
+                                </button>
+
+                            </li>
+
+                            <li class="nav-item">
+
+                                <button
+                                    class="nav-link"
+                                    data-bs-toggle="pill"
+                                    data-bs-target="#registerTab">
+
+                                    Registrarme
+
+                                </button>
+
+                            </li>
+
+                        </ul>
+
+                        <div class="tab-content">
+
+                            <div class="tab-pane fade show active" id="loginTab">
+
+                                <form id="loginForm">
+
+                                    @csrf
+
+                                    <div class="mb-3">
+
+                                        <input
+                                            type="email"
+                                            class="form-control"
+                                            name="email"
+                                            placeholder="Correo electrónico">
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            name="password"
+                                            placeholder="Contraseña">
+
+                                    </div>
+
+                                    <button
+                                        class="btn btn-dark w-100 py-3">
+
+                                        Ingresar
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                            <div class="tab-pane fade" id="registerTab">
+
+                                <form id="registerForm">
+
+                                    @csrf
+
+                                    <div class="mb-3">
+
+                                        <input
+                                            class="form-control"
+                                            name="name"
+                                            placeholder="Nombre completo">
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <input
+                                            class="form-control"
+                                            name="email"
+                                            placeholder="Correo">
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            name="password"
+                                            placeholder="Contraseña">
+
+                                    </div>
+
+                                    <div class="mb-3">
+
+                                        <input
+                                            type="password"
+                                            class="form-control"
+                                            name="password_confirmation"
+                                            placeholder="Confirmar contraseña">
+
+                                    </div>
+
+                                    <button
+                                        class="btn btn-primary w-100 py-3">
+
+                                        Crear Cuenta
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 

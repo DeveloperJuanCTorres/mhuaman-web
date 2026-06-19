@@ -43,6 +43,7 @@
                 <ul class="list-unstyled d-flex flex-column gap-3 mb-4">
                     <li><a href="#">Política de Privacidad</a></li>
                     <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Libro de Reclamaciones</a></li>
                 </ul>
                 <div class="d-flex gap-3 fs-5">
                     <a href="{{ $company->facebook }}" target="_blank"><i class="fa-brands fa-facebook"></i></a>

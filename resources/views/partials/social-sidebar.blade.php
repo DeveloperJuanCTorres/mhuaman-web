@@ -1,9 +1,19 @@
 <!-- Social Sidebar -->
 <div class="social-sidebar">
+    @if($company->facebook)
     <a href="{{ $company->facebook }}" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+    @endif
+    @if($company->tiktok)
     <a href="{{ $company->tiktok }}" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+    @endif
+
+    @if($company->instagram)
     <a href="{{ $company->instagram }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    @endif
+
+    @if($company->linkedin)
     <a href="{{ $company->linkedin }}" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+    @endif
 </div>
 <!-- Floating Cart Button -->
 <a class="cart-btn" href="#" data-bs-target="#cartOffcanvas" data-bs-toggle="offcanvas">

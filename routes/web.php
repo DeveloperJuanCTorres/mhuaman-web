@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,17 @@ Route::get('/cursos', [App\Http\Controllers\HomeController::class, 'cursos'])->n
 Route::get('/clientes', [App\Http\Controllers\HomeController::class, 'clientes'])->name('clientes');
 Route::get('/consultoria', [App\Http\Controllers\HomeController::class, 'consultoria'])->name('consultoria');
 Route::get('/checkout', [App\Http\Controllers\HomeController::class, 'checkout'])->name('checkout');
+
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/perfil', [ProfileController::class, 'index'])
+        ->name('perfil');
+
+    Route::put('/perfil', [ProfileController::class, 'update'])
+        ->name('perfil.update');
+
+});
 
 Route::post(
     '/consultorias/enviar',

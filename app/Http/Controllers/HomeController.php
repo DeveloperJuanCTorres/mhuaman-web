@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SolicitudConsultoriaMail;
 use App\Models\Course;
+use App\Models\Customer;
 use App\Models\Taxonomy;
 
 class HomeController extends Controller
@@ -38,7 +39,9 @@ class HomeController extends Controller
         $company = Company::first();
         $banners = Banner::all();
         $beneficio = Benefit::first();
-        return view('home', compact('company', 'banners', 'beneficio'));
+        $clientes = Customer::all();
+        $cursos = Course::with(['specialist.degree'])->where('active', 1)->limit(3)->get();
+        return view('home', compact('company', 'banners', 'beneficio', 'clientes','cursos'));
     }
 
     public function about()
@@ -61,7 +64,8 @@ class HomeController extends Controller
     public function clientes()
     {
         $company = Company::first();
-        return view('clientes', compact('company'));
+        $clientes = Customer::all();
+        return view('clientes', compact('company', 'clientes'));
     }
 
     public function consultoria()

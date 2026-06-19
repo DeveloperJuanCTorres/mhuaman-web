@@ -878,7 +878,7 @@ footer a:hover {
 .logo-track {
     display: flex;
     width: calc(250px * 10);
-    animation: scroll 30s linear infinite;
+    animation: scroll 20s linear infinite;
 }
 
 @keyframes scroll {
@@ -1351,5 +1351,70 @@ footer {
     transform:scale(.9);
 
     display:none !important;
+
+}
+
+
+
+
+.auth-modal{
+
+    border:none;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+}
+
+.auth-left{
+
+    background:linear-gradient(135deg,#0f172a,#1e3a8a);
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:50px;
+
+}
+
+.auth-right{
+
+    padding:45px;
+
+}
+
+.auth-right input{
+
+    height:55px;
+
+    border-radius:12px;
+
+}
+
+.auth-right button{
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+}
+
+.nav-pills .nav-link{
+
+    border-radius:10px;
+
+    font-weight:bold;
+
+}
+
+.nav-pills .nav-link.active{
+
+    background:#0d6efd;
 
 }

@@ -109,23 +109,26 @@
                 <span class="section-title-tag">Nuestros Programas</span>
                 <h2 class="display-5 fw-bold text-dark-blue">Cursos Especializados</h2>
             </div>
-            <a class="text-dark-blue fw-bold text-decoration-none border-bottom border-dark border-2 pb-1" href="#">Ver todo el catálogo</a>
+            <a class="text-dark-blue fw-bold text-decoration-none border-bottom border-dark border-2 pb-1" href="{{route('cursos')}}">Ver todo el catálogo</a>
         </div>
         <div class="row g-4">
-            <!-- Course 1 -->
-            <div class="col-md-6 col-lg-4">
+            @foreach($cursos as $curso)
+            <div class="col-md-6 col-lg-4"
+                data-nombre="{{ mb_strtolower($curso->nombre, 'UTF-8') }}"
+                data-categoria="{{ $curso->taxonomy_id }}">
+
                 <div class="card course-card">
                     <div class="card-img-container">
-                        <img alt="Auditoría Financiera" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLu6UJJt4FnMkOQOrOtwb4K1cwL3qenfqWdofW-LsnuTiTZkHqmW2a1tMw7DAlaQPe8dY8Utpl5Kf_O5BBavyYM5Ek_5J9aDhxPbzvAO7ISNST9gvduo50ROXaUodhosMRvgFpgMRy241g14MEFruzynpXiJuDO_CCIPPciglwqM0BTQ8UbnzKwVOCDl7CnFnEmVgfRaWGgjRwbAiq-OrdUxgStzQeJMdA2aZhBE2ixNtMLHWzhQrHpj7vbJkehAqTE9aH0QeecT0" />
+                        <img alt="Auditoría Financiera" class="card-img-top" src="{{asset ('storage/' . $curso->imagen)}}" />
                         <span class="badge-new">Nuevo</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Auditoría Financiera Gubernamental</h3>
+                        <h3 class="card-title">{{$curso->nombre}}</h3>
                         <ul class="info-list">
-                            <li><i class="fa-solid fa-user"></i> Dr. Roberto Huaman</li>
-                            <li><i class="fa-solid fa-laptop"></i> Virtual (En Vivo)</li>
-                            <li><i class="fa-solid fa-clock"></i> 48 Horas Académicas</li>
-                            <li><i class="fa-solid fa-certificate"></i> Certificación Universitaria</li>
+                            <li><i class="fa-solid fa-user"></i> {{ $curso->specialist->degree->abreviatura }} {{ $curso->specialist->nombre }}</li>
+                            <li><i class="fa-solid fa-laptop"></i> Virtual (Grabado)</li>
+                            <li><i class="fa-solid fa-clock"></i> {{$curso->horas}} Horas Académicas</li>
+                            <li><i class="fa-solid fa-certificate"></i> Certificación</li>
                         </ul>
                         <div class="card-footer-custom">
                             <div>
@@ -137,56 +140,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Course 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card course-card">
-                    <div class="card-img-container">
-                        <img alt="Control Interno" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL3v6gOK2IVPa7JX9_FZLCkLJRGDtxMmrhQZhQXmudC0qFwWfcwm80CRfi82xE6MWYZggV7y7U25s_UZHrvN36ycHI4aUu9p0Ikic3WV9wmgkdZhtZCm7PKKZltaUdvr7nNpaAVvPy0AENDcmCPW02PUBrZUpgyIE6oGFIpCmh3KkJ6HfAbEHyT19UtWTDYj5yus--0dkFSB3TGGyMYkCenK8po4COYMlwDU3jzhBwGcprRP6NBgLo1cHJjur4puYMMXHShUk2Br8" />
-                        <span class="badge-popular">Popular</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Sistema Nacional de Control</h3>
-                        <ul class="info-list">
-                            <li><i class="fa-solid fa-user"></i> Mag. Elena Vargas</li>
-                            <li><i class="fa-solid fa-circle-play"></i> Asincrónico (Grabado)</li>
-                            <li><i class="fa-solid fa-clock"></i> 32 Horas Académicas</li>
-                            <li><i class="fa-solid fa-certificate"></i> Certificación Institucional</li>
-                        </ul>
-                        <div class="card-footer-custom">
-                            <div>
-                                <span class="price-label">Inversión</span>
-                                <span class="price-value">S/ 320.00</span>
-                            </div>
-                            <button class="btn btn-inscribirme">Inscribirme</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Course 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card course-card">
-                    <div class="card-img-container">
-                        <img alt="Gestión Pública" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbaQHEmsqZsIV3_3z8XhqPyVoGgDfdyoNiGIGXKqveVaZntkK_AUUfxJQGtckeGOjiigdyueE8pQ74HAjjWwgGOb6URww2-TlhDDgvkPzY3tSJJdEZXIs0DZIV_OkdLlIAwAqYCae0nwyThTv8OAuzfy4hwOtKasR2KFYmBqSpukWxbeAwHzxjEGTAmLHiAMmfgW26vvXirg7zqi6_diIs3u0kfgQDoVicRQ39mUZ85csvoqU-L2898zvlyeSaQrkHP_bDfWQY0-8" />
-                        <span class="badge-new">Nuevo</span>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title">Gestión Pública por Resultados</h3>
-                        <ul class="info-list">
-                            <li><i class="fa-solid fa-user"></i> Eco. Juan Carlos Paz</li>
-                            <li><i class="fa-solid fa-laptop"></i> Virtual (En Vivo)</li>
-                            <li><i class="fa-solid fa-clock"></i> 60 Horas Académicas</li>
-                            <li><i class="fa-solid fa-certificate"></i> Doble Certificación</li>
-                        </ul>
-                        <div class="card-footer-custom">
-                            <div>
-                                <span class="price-label">Inversión</span>
-                                <span class="price-value">S/ 580.00</span>
-                            </div>
-                            <button class="btn btn-inscribirme">Inscribirme</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -225,28 +179,19 @@
     </div>
 </section>
 <!-- Clients Grid -->
-<section class="py-5 bg-white">
-    <div class="container">
-        <p class="text-center small text-uppercase tracking-wider text-muted mb-5">Empresas que confían en nosotros</p>
-        <div class="row row-cols-2 row-cols-md-5 g-5 align-items-center justify-content-center opacity-50 grayscale">
-            <div class="col">
-                <div class="bg-light rounded p-4 text-center">CLIENTE 1</div>
-            </div>
-            <div class="col">
-                <div class="bg-light rounded p-4 text-center">CLIENTE 2</div>
-            </div>
-            <div class="col">
-                <div class="bg-light rounded p-4 text-center">CLIENTE 3</div>
-            </div>
-            <div class="col">
-                <div class="bg-light rounded p-4 text-center">CLIENTE 4</div>
-            </div>
-            <div class="col">
-                <div class="bg-light rounded p-4 text-center">CLIENTE 5</div>
-            </div>
+<section class="logo-carousel bg-white">
+    <div class="container mb-4">
+        <p class="text-center text-uppercase fw-bold text-muted small ls-wider" style="letter-spacing: 0.2em;">Empresas que confían en nosotros</p>
+    </div>
+    <div class="logo-track">
+        @foreach($clientes as $cliente)
+        <div class="logo-item">
+            <img src="{{asset('storage/' . $cliente->imagen)}}" width="100" alt="">
         </div>
+        @endforeach
     </div>
 </section>
+
 <!-- Final CTA -->
 <section class="section-padding container">
     <div class="bg-dark-blue rounded-5 p-5 p-lg-5 text-center text-white position-relative overflow-hidden shadow-lg">
@@ -256,8 +201,8 @@
         <h2 class="display-4 fw-bold mb-4 position-relative">¿Listo para alcanzar el siguiente nivel en tu carrera profesional?</h2>
         <p class="fs-5 opacity-75 mb-5 position-relative">Únete a cientos de profesionales certificados y transforma tu futuro con M HUAMAN.</p>
         <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 position-relative">
-            <button class="btn btn-gold btn-lg rounded-3">Inscribirme Ahora</button>
-            <button class="btn btn-outline-gold btn-lg rounded-3">Hablar con un Asesor</button>
+            <a href="{{ route('cursos') }}" class="btn btn-gold btn-lg rounded-3">Ver Cursos</a>
+            <a href="{{ route('consultoria') }}" class="btn btn-outline-gold btn-lg rounded-3">Solicitar Consultoría</a>
         </div>
     </div>
 </section>

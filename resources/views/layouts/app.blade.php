@@ -10,7 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <?php
-        $version = '1993.0.3';
+        $version = '1993.0.4';
     ?>
 
     <!-- Fonts -->
@@ -70,8 +70,112 @@
         </script>
     @endif
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        $("#loginForm").submit(function(e){
+
+            e.preventDefault();
+
+            $.ajax({
+
+                url: "/login",
+
+                method: "POST",
+
+                data: $(this).serialize(),
+
+                success: function(response){
+
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    setTimeout(function(){
+
+                        location.reload();
+
+                    }, 1000);
+
+                },
+
+                error: function(xhr){
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: xhr.responseJSON.message
+                            ?? 'Correo o contraseña incorrectos.'
+                    });
+
+                }
+
+            });
+
+        });
+
+        $("#registerForm").submit(function(e){
+
+            e.preventDefault();
+
+            $.ajax({
+
+                url: "/register",
+
+                method: "POST",
+
+                data: $(this).serialize(),
+
+                success: function(response){
+
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: response.message,
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+
+                    setTimeout(function(){
+
+                        location.reload();
+
+                    }, 1000);
+
+                },
+
+                error: function(xhr){
+
+                    let mensaje = "Ocurrió un error.";
+
+                    if(xhr.responseJSON.errors){
+
+                        mensaje = Object.values(xhr.responseJSON.errors)
+                            .flat()
+                            .join("\n");
+
+                    }
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: mensaje
+                    });
+
+                }
+
+            });
+
+        });
+    </script>
     
 </body>
 </html>

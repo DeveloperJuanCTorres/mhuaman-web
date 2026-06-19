@@ -82,7 +82,22 @@
                                 <span class="price-label">Inversión</span>
                                 <span class="price-value">S/ 450.00</span>
                             </div>
-                            <button class="btn btn-inscribirme">Inscribirme</button>
+                            @auth
+                            <button
+                                class="btn btn-inscribirme agregarCarrito"
+                                data-curso="{{ $curso->id }}">
+                                Inscribirme
+                            </button>
+                            @endauth
+
+                            @guest
+                            <button
+                                class="btn btn-inscribirme abrirLogin"
+                                data-bs-toggle="modal"
+                                data-bs-target="#authModal">
+                                Inscribirme
+                            </button>
+                            @endguest
                         </div>
                     </div>
                 </div>
@@ -118,68 +133,70 @@
 </section>
 
 
+
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
 
-document.addEventListener("DOMContentLoaded", function () {
+        const buscador = document.getElementById("buscarCurso");
+        const botones = document.querySelectorAll(".categoria-btn");
+        const cursos = document.querySelectorAll(".curso-item");
 
-    const buscador = document.getElementById("buscarCurso");
-    const botones = document.querySelectorAll(".categoria-btn");
-    const cursos = document.querySelectorAll(".curso-item");
+        let categoriaActual = "todos";
 
-    let categoriaActual = "todos";
+        function normalizar(texto) {
+            return (texto || "")
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
+        }
 
-    function normalizar(texto) {
-        return (texto || "")
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
-    }
+        function filtrar() {
 
-    function filtrar() {
+            const texto = normalizar(buscador.value);
 
-        const texto = normalizar(buscador.value);
+            cursos.forEach(curso => {
 
-        cursos.forEach(curso => {
+                const nombre = normalizar(curso.dataset.nombre);
+                const categoria = curso.dataset.categoria;
 
-            const nombre = normalizar(curso.dataset.nombre);
-            const categoria = curso.dataset.categoria;
+                const coincideNombre = nombre.includes(texto);
 
-            const coincideNombre = nombre.includes(texto);
+                const coincideCategoria =
+                    categoriaActual === "todos" ||
+                    categoria == categoriaActual;
 
-            const coincideCategoria =
-                categoriaActual === "todos" ||
-                categoria == categoriaActual;
+                if (coincideNombre && coincideCategoria) {
+                    curso.style.display = "";
+                } else {
+                    curso.style.display = "none";
+                }
 
-            if (coincideNombre && coincideCategoria) {
-                curso.style.display = "";
-            } else {
-                curso.style.display = "none";
-            }
+            });
 
-        });
+        }
 
-    }
+        buscador.addEventListener("input", filtrar);
 
-    buscador.addEventListener("input", filtrar);
+        botones.forEach(btn => {
 
-    botones.forEach(btn => {
+            btn.addEventListener("click", function () {
 
-        btn.addEventListener("click", function () {
+                botones.forEach(x => x.classList.remove("active"));
 
-            botones.forEach(x => x.classList.remove("active"));
+                this.classList.add("active");
 
-            this.classList.add("active");
+                categoriaActual = this.dataset.id;
 
-            categoriaActual = this.dataset.id;
+                filtrar();
 
-            filtrar();
+            });
 
         });
 
     });
-
-});
 </script>
+
+
 @endsection
 
 
