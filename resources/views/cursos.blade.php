@@ -80,7 +80,7 @@
                         <div class="card-footer-custom">
                             <div>
                                 <span class="price-label">Inversión</span>
-                                <span class="price-value">S/ 450.00</span>
+                                <span class="price-value">S/ {{ number_format($curso->precio, 2) }} </span>
                             </div>
                             @auth
                             <button

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,12 @@ Route::get('/cursos', [App\Http\Controllers\HomeController::class, 'cursos'])->n
 Route::get('/clientes', [App\Http\Controllers\HomeController::class, 'clientes'])->name('clientes');
 Route::get('/consultoria', [App\Http\Controllers\HomeController::class, 'consultoria'])->name('consultoria');
 Route::get('/checkout', [App\Http\Controllers\HomeController::class, 'checkout'])->name('checkout');
+
+Route::get('/terminos-y-condiciones', [App\Http\Controllers\HomeController::class, 'terminos'])->name('terminos');
+Route::get('/politicas-de-privacidad', [App\Http\Controllers\HomeController::class, 'politicas'])->name('politicas');
+
+Route::get('/libro-de-reclamaciones', [HomeController::class, 'libroReclamaciones'])
+    ->name('libro-reclamaciones');
 
 
 Route::middleware('auth')->group(function () {

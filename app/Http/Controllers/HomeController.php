@@ -95,4 +95,23 @@ class HomeController extends Controller
 
         return back()->with('success', true);
     }
+
+    public function terminos()
+    {
+        $company = Company::first();
+        return view('terminos', compact('company'));
+    }
+
+    public function politicas()
+    {
+        $company = Company::first();
+        return view('politicas', compact('company'));
+    }
+
+    public function libroReclamaciones()
+    {
+        $company = Company::first();
+
+        return view('libro-reclamaciones', compact('company'));
+    }
 }
